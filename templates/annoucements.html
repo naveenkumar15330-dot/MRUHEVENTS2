@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MRU Campus Announcements</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --mru-blue: #003366;
+        --mru-orange: #ff6600;
+        --light-bg: #f5f5f5;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--light-bg);
+        color: #333;
+      }
+
+      .mru-header {
+        background-color: var(--mru-blue);
+        color: white;
+        padding: 2rem 0;
+        margin-bottom: 2rem;
+        background-image: linear-gradient(
+          to right,
+          rgb(255, 255, 255),
+          rgb(123, 122, 126)
+        );
+      }
+
+      .mru-badge {
+        background-color: var(--mru-orange);
+        color: white;
+        padding: 0.2rem 0.5rem;
+        border-radius: 0.25rem;
+        font-size: 0.7em;
+        font-weight: bold;
+      }
+
+      .announcement-image {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .announcement-thumbnail {
+        cursor: pointer;
+        transition: transform 0.2s;
+        margin-bottom: 1rem;
+      }
+
+      .announcement-thumbnail:hover {
+        transform: translateY(-5px);
+      }
+
+      .thumbnail-image {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 0.5rem 0.5rem 0 0;
+      }
+
+      .thumbnail-content {
+        background: white;
+        padding: 1rem;
+        border-radius: 0 0 0.5rem 0.5rem;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .thumbnail-title {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .thumbnail-date {
+        font-size: 0.8rem;
+        color: #666;
+      }
+
+      .nav-button {
+        background-color: var(--mru-blue);
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        margin-right: 0.5rem;
+        border-radius: 0.25rem;
+      }
+
+      .nav-button:hover {
+        background-color: #004080;
+      }
+
+      .nav-button:disabled {
+        background-color: #cccccc;
+        cursor: not-allowed;
+      }
+
+      .mru-logo {
+        height: 80px;
+        margin-bottom: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="mru-header">
+      <div class="container">
+        <div class="text-center">
+          <img
+            src="https://static.wixstatic.com/media/6685d7_686c085bd3864f3e8ae805bfc3407db3~mv2.png/v1/fill/w_420,h_393,al_c,lg_1,q_85,enc_avif,quality_auto/MRU-Logo2.png"
+            alt="MRU Logo"
+            class="mru-logo"
+          />
+          <h1 class="mb-0">Campus Announcements</h1>
+        </div>
+      </div>
+    </header>
+
+    <div class="container mb-5">
+      <!-- Detailed Announcement View -->
+      <div id="announcementDetail" class="row mb-4">
+        <!-- Content loaded by JavaScript -->
+      </div>
+
+      <!-- Navigation -->
+      <div class="d-flex justify-content-center mb-4">
+        <button id="prevBtn" class="nav-button" disabled>Previous</button>
+        <button id="nextBtn" class="nav-button">Next</button>
+      </div>
+
+      <!-- Thumbnail List -->
+      <h2 class="mb-4">
+        Recent Updates <span class="mru-badge">MRU 2024</span>
+      </h2>
+      <div id="announcementList" class="row">
+        <!-- Thumbnails loaded by JavaScript -->
+      </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // MRU-specific announcements
+      const announcements = [
+        {
+          id: 1,
+          title: "MRU Engineering Admissions 2024",
+          date: "May 20, 2024",
+          image:
+            "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80",
+          description:
+            "Applications for B.Tech programs (CSE, ECE, Mechanical, Civil) are now open. Last date: June 30, 2024. Entrance via EAMCET/JEE Mains or MRU-CET. <strong>Scholarships available</strong> for top rankers.",
+        },
+        {
+          id: 2,
+          title: "Campus Placement Drive (Amazon, TCS)",
+          date: "May 15, 2024",
+          image:
+            "https://images.unsplash.com/photo-1521791055366-0d553872125f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80",
+          description:
+            "Amazon and TCS will conduct recruitment drives on campus from June 5-7, 2024. Eligible branches: CSE, IT, ECE. <strong>Registration mandatory</strong> through the placement portal by May 30.",
+        },
+        {
+          id: 3,
+          title: "New AI Research Lab Inauguration",
+          date: "May 10, 2024",
+          image:
+            "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80",
+          description:
+            "MRU launches a state-of-the-art AI lab with NVIDIA DGX systems. Open to all engineering students from June 2024. Faculty: Dr. Srinivas Reddy (ex-Microsoft).",
+        },
+        {
+          id: 4,
+          title: "Semester Exams Schedule",
+          date: "May 5, 2024",
+          image:
+            "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80",
+          description:
+            "June 2024 semester exams schedule released. Check the student portal for your timetable. <strong>Revaluation requests</strong> must be submitted within 7 days of results.",
+        },
+      ];
+
+      // DOM Elements
+      const announcementDetail = document.getElementById("announcementDetail");
+      const announcementList = document.getElementById("announcementList");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+
+      let currentIndex = 0;
+
+      // Display announcement detail
+      function displayAnnouncement(index) {
+        const announcement = announcements[index];
+        announcementDetail.innerHTML = `
+          <div class="col-12">
+            <img src="${announcement.image}" alt="${announcement.title}" class="announcement-image">
+            <div class="bg-white p-4 rounded shadow-sm">
+              <div class="d-flex align-items-center mb-3">
+                <span class="me-2">${announcement.date}</span>
+                <span class="mru-badge">MRU OFFICIAL</span>
+              </div>
+              <h2 class="mb-3">${announcement.title}</h2>
+              <div class="announcement-description">${announcement.description}</div>
+            </div>
+          </div>
+        `;
+        prevBtn.disabled = index === 0;
+        nextBtn.disabled = index === announcements.length - 1;
+      }
+
+      // Display thumbnails
+      function displayThumbnails() {
+        announcementList.innerHTML = announcements
+          .map(
+            (announcement) => `
+          <div class="col-md-6 col-lg-3">
+            <div class="announcement-thumbnail" data-id="${announcement.id}">
+              <img src="${announcement.image}" alt="${announcement.title}" class="thumbnail-image">
+              <div class="thumbnail-content">
+                <h3 class="thumbnail-title">${announcement.title}</h3>
+                <div class="thumbnail-date">${announcement.date}</div>
+              </div>
+            </div>
+          </div>
+        `
+          )
+          .join("");
+
+        document
+          .querySelectorAll(".announcement-thumbnail")
+          .forEach((thumb) => {
+            thumb.addEventListener("click", () => {
+              const id = parseInt(thumb.getAttribute("data-id"));
+              currentIndex = announcements.findIndex((a) => a.id === id);
+              displayAnnouncement(currentIndex);
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+          });
+      }
+
+      // Navigation
+      prevBtn.addEventListener("click", () => {
+        if (currentIndex > 0) displayAnnouncement(--currentIndex);
+      });
+      nextBtn.addEventListener("click", () => {
+        if (currentIndex < announcements.length - 1)
+          displayAnnouncement(++currentIndex);
+      });
+
+      // Keyboard navigation
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft" && currentIndex > 0)
+          displayAnnouncement(--currentIndex);
+        else if (
+          e.key === "ArrowRight" &&
+          currentIndex < announcements.length - 1
+        )
+          displayAnnouncement(++currentIndex);
+      });
+
+      // Initialize
+      displayAnnouncement(currentIndex);
+      displayThumbnails();
+    </script>
+  </body>
+</html>

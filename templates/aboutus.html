@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us | Mallareddy University</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #2b328c;
+        --accent: #f46a1c;
+        --light-bg: #f8f9fa;
+        --text-light: #ffffff;
+        --text-dark: #333333;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+        line-height: 1.6;
+        color: var(--text-dark);
+        background-color: var(--light-bg);
+      }
+
+      .header {
+        text-align: center;
+        padding: 30px 0 20px;
+      }
+
+      .logo-container {
+        background-color: white;
+        padding: 4px;
+        border-radius: 8px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+        display: inline-block;
+        margin-bottom: 15px;
+      }
+
+      .logo {
+        height: 60px;
+        width: auto;
+      }
+
+      .university-name {
+        font-weight: 700;
+        color: var(--primary);
+        margin: 10px 0 5px 0;
+        font-size: 1.8rem;
+      }
+
+      .university-motto {
+        font-size: 1em;
+        color: rgba(0, 0, 0, 0.6);
+        font-style: italic;
+        margin-bottom: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      h1 {
+        color: var(--primary);
+        font-size: 2.5rem;
+        text-align: center;
+        margin: 30px 0;
+      }
+
+      h2 {
+        color: var(--primary);
+        border-bottom: 2px solid var(--accent);
+        padding-bottom: 10px;
+        margin-top: 40px;
+        font-weight: 600;
+      }
+
+      .hero {
+        background: linear-gradient(
+            rgba(43, 50, 140, 0.8),
+            rgba(43, 50, 140, 0.8)
+          ),
+          url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
+        background-size: cover;
+        background-position: center;
+        color: white;
+        text-align: center;
+        padding: 100px 20px;
+        margin-bottom: 40px;
+      }
+
+      .hero h2 {
+        color: white;
+        border-bottom: 2px solid var(--accent);
+        display: inline-block;
+        font-weight: 600;
+      }
+
+      .hero p {
+        font-size: 1.2em;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .mission,
+      .values {
+        background: white;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 40px;
+      }
+
+      .mission p {
+        font-size: 1.1em;
+        line-height: 1.8;
+      }
+
+      .values-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+        margin-top: 30px;
+      }
+
+      .value-card {
+        background: var(--light-bg);
+        padding: 25px;
+        border-radius: 8px;
+        border-left: 4px solid var(--accent);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .value-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .value-card h3 {
+        color: var(--primary);
+        margin-top: 0;
+        font-size: 1.3em;
+      }
+
+      .value-card p {
+        line-height: 1.7;
+      }
+
+      footer {
+        background-color: var(--primary);
+        color: white;
+        text-align: center;
+        padding: 30px 0;
+        margin-top: 60px;
+      }
+
+      .btn {
+        display: inline-block;
+        background-color: var(--accent);
+        color: white;
+        padding: 14px 32px;
+        text-decoration: none;
+        border-radius: 4px;
+        font-weight: 600;
+        margin-top: 20px;
+        transition: all 0.3s;
+        font-size: 1.1em;
+      }
+
+      .btn:hover {
+        background-color: #d45a16;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .cta {
+        text-align: center;
+        margin: 50px 0;
+      }
+
+      .history {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        margin-bottom: 40px;
+      }
+
+      .history-content {
+        flex: 1;
+      }
+
+      .history-image {
+        flex: 1;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .history-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      @media (max-width: 992px) {
+        .history {
+          flex-direction: column;
+        }
+
+        .history-image {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 2rem;
+        }
+
+        .mission,
+        .values {
+          padding: 30px;
+        }
+
+        .hero {
+          padding: 80px 20px;
+        }
+
+        .university-name {
+          font-size: 1.5rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .header {
+          padding: 20px 0 15px;
+        }
+
+        .logo {
+          height: 50px;
+        }
+
+        .mission,
+        .values {
+          padding: 25px 20px;
+        }
+
+        .values-list {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="logo-container">
+        <img
+          class="logo"
+          src="https://static.wixstatic.com/media/6685d7_686c085bd3864f3e8ae805bfc3407db3~mv2.png/v1/fill/w_420,h_393,al_c,lg_1,q_85,enc_avif,quality_auto/MRU-Logo2.png"
+          alt="Mallareddy University Logo"
+        />
+      </div>
+      <div class="university-name">Mallareddy University</div>
+      <div class="university-motto">Excellence in Education</div>
+    </div>
+
+    <section class="hero">
+      <div class="container">
+        <h2>About Mallareddy University</h2>
+        <p>
+          Shaping futures through innovation and academic excellence since 2005
+        </p>
+      </div>
+    </section>
+
+    <main class="container">
+      <section class="mission">
+        <h2>Our History</h2>
+        <div class="history">
+          <div class="history-content">
+            <p>
+              Malla Reddy University (MRU), established in 2020 in Hyderabad,
+              Telangana, is a premier private university under the Malla Reddy
+              Group of Institutions. Spread across a sprawling 100-acre campus,
+              MRU offers a wide range of undergraduate, postgraduate, and
+              doctoral programs in engineering, management, sciences,
+              humanities, agriculture, and allied health sciences.
+            </p>
+            <p>
+              The university is recognized by the University Grants Commission
+              (UGC) and has earned an NAAC A++ grade, reflecting its strong
+              commitment to academic excellence and quality education. MRU
+              fosters innovation and entrepreneurship through its
+              state-of-the-art laboratories, research centers, and industry
+              tie-ups with companies like Microsoft, Amazon, and TCS. With
+              modern infrastructure, highly qualified faculty, and a strong
+              placement record, MRU is emerging as one of the top destinations
+              for higher education in South India.
+            </p>
+          </div>
+          <div class="history-image">
+            <img
+              src="https://pbs.twimg.com/media/EBMWM--UcAAYXHT.jpg:large"
+              alt="University Campus"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="mission">
+        <h2>Our Mission</h2>
+        <p>
+          Mallareddy University is committed to providing transformative
+          education that empowers students to become leaders in their fields. We
+          foster an environment of intellectual curiosity, innovation, and
+          social responsibility.
+        </p>
+        <p>
+          Through our rigorous academic programs, cutting-edge research
+          initiatives, and strong industry partnerships, we prepare our students
+          to meet the challenges of a rapidly evolving global landscape.
+        </p>
+      </section>
+
+      <section class="values">
+        <h2>Our Core Values</h2>
+        <div class="values-list">
+          <div class="value-card">
+            <h3>Academic Excellence</h3>
+            <p>
+              We maintain the highest standards in teaching and research,
+              ensuring our students receive a world-class education that
+              prepares them for successful careers.
+            </p>
+          </div>
+          <div class="value-card">
+            <h3>Innovation</h3>
+            <p>
+              We encourage creative thinking and problem-solving, fostering an
+              environment where new ideas can flourish and make a real-world
+              impact.
+            </p>
+          </div>
+          <div class="value-card">
+            <h3>Integrity</h3>
+            <p>
+              We uphold the highest ethical standards in all our activities,
+              promoting honesty, fairness, and respect in every aspect of
+              university life.
+            </p>
+          </div>
+          <div class="value-card">
+            <h3>Community Engagement</h3>
+            <p>
+              We are committed to serving our local and global communities
+              through outreach programs, partnerships, and initiatives that
+              create positive social change.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div class="cta">
+        <a href="{{ url_for('contact') }}" class="btn">Contact Our Team</a>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2023 Mallareddy University. All rights reserved.</p>
+        <p>Contact: info@mallareddyuniversity.edu.in | +91 40 1234 5678</p>
+      </div>
+    </footer>
+  </body>
+</html>

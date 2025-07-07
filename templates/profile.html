@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>University Profile Finder</title>
+    <style>
+      :root {
+        --primary: #2b328c;
+        --accent: #f46a1c;
+        --light-bg: #f8f9fa;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: var(--light-bg);
+        margin: 0;
+        padding: 20px;
+      }
+      .container {
+        width: 100%;
+        max-width: 450px;
+      }
+      .card {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        border-top: 4px solid var(--accent);
+      }
+      .card-header {
+        background: var(--primary);
+        color: white;
+        padding: 25px;
+        text-align: center;
+      }
+      .card-title {
+        margin: 0;
+        font-size: 1.5rem;
+      }
+      .card-body {
+        padding: 25px;
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+      label {
+        display: block;
+        font-weight: 600;
+        color: var(--primary);
+        margin-bottom: 8px;
+      }
+      input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        box-sizing: border-box;
+      }
+      .btn {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 5px;
+        font-weight: 600;
+        cursor: pointer;
+        background: var(--primary);
+        color: white;
+        font-size: 16px;
+      }
+      .profile-pic {
+        width: 100px;
+        height: 100px;
+        background: white;
+        color: var(--primary);
+        border-radius: 50%;
+        font-size: 48px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 15px;
+        border: 3px solid var(--accent);
+      }
+      .profile-info {
+        text-align: center;
+        margin-bottom: 25px;
+      }
+      .profile-name {
+        font-size: 1.5rem;
+        margin: 10px 0 5px;
+      }
+      .profile-email {
+        color: #666;
+        word-break: break-word;
+      }
+      .hidden {
+        display: none;
+      }
+      .error {
+        color: #e74c3c;
+        text-align: center;
+        margin-top: 15px;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card" id="emailCard">
+        <div class="card-header">
+          <h1 class="card-title">Find Your Profile</h1>
+        </div>
+        <div class="card-body">
+          <form id="emailForm">
+            <div class="form-group">
+              <label for="email">Enter University Email</label>
+              <input
+                type="email"
+                id="email"
+                placeholder="user@mallareddyuniversity.ac.in"
+                required
+              />
+            </div>
+            <button type="submit" class="btn">Find Profile</button>
+          </form>
+          <div id="emailError" class="error hidden"></div>
+        </div>
+      </div>
+
+      <div class="card hidden" id="profileCard">
+        <div class="card-header">
+          <div class="profile-pic" id="profileInitial">M</div>
+        </div>
+        <div class="card-body">
+          <div class="profile-info">
+            <h2 class="profile-name" id="profileName">User Name</h2>
+            <div class="profile-email" id="profileEmail">
+              user@mallareddyuniversity.ac.in
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Department</label>
+            <input type="text" id="profileDept" readonly />
+          </div>
+          <div class="form-group">
+            <label>Student ID</label>
+            <input type="text" id="profileId" readonly />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const emailForm = document.getElementById("emailForm");
+      const emailInput = document.getElementById("email");
+      const emailError = document.getElementById("emailError");
+      const profileCard = document.getElementById("profileCard");
+      const emailCard = document.getElementById("emailCard");
+
+      const profileInitial = document.getElementById("profileInitial");
+      const profileName = document.getElementById("profileName");
+      const profileEmail = document.getElementById("profileEmail");
+      const profileDept = document.getElementById("profileDept");
+      const profileId = document.getElementById("profileId");
+      const backBtn = document.getElementById("backBtn");
+
+      emailForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const email = emailInput.value;
+
+        const response = await fetch("/get-profile", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          emailCard.classList.add("hidden");
+          profileCard.classList.remove("hidden");
+
+          profileInitial.textContent = data.name.charAt(0).toUpperCase();
+          profileName.textContent = data.name;
+          profileEmail.textContent = data.email;
+          profileDept.value = data.department;
+          profileId.value = data.student_id;
+          emailError.classList.add("hidden");
+        } else {
+          emailError.textContent = data.error;
+          emailError.classList.remove("hidden");
+        }
+      });
+
+      backBtn.addEventListener("click", function () {
+        emailCard.classList.remove("hidden");
+        profileCard.classList.add("hidden");
+        emailForm.reset();
+        emailError.classList.add("hidden");
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mallareddy University</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --primary: #2b328c;
+        --accent: #f46a1c;
+        --light-bg: #f8f9fa;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--light-bg);
+      }
+
+      .bg-primary {
+        background-color: var(--primary) !important;
+      }
+
+      .text-primary {
+        color: var(--primary) !important;
+      }
+
+      .btn-primary {
+        background-color: var(--primary) !important;
+        border-color: var(--primary) !important;
+      }
+
+      .btn-outline-primary {
+        color: var(--primary) !important;
+        border-color: var(--primary) !important;
+      }
+
+      .btn-outline-primary:hover {
+        background-color: var(--primary) !important;
+        color: white !important;
+      }
+
+      .btn-accent {
+        background-color: var(--accent) !important;
+        border-color: var(--accent) !important;
+        color: white !important;
+      }
+
+      .btn-accent:hover {
+        background-color: #d45a16 !important;
+        border-color: #d45a16 !important;
+      }
+
+      .text-accent {
+        color: var(--accent) !important;
+      }
+
+      .navbar-custom {
+        background: linear-gradient(90deg, var(--primary), #1e245f) !important;
+      }
+
+      .feature-card {
+        transition: transform 0.3s;
+        border: none !important;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .logo-container {
+        background-color: white;
+        padding: 4px;
+        border-radius: 8px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .hover-text-accent:hover {
+        color: var(--accent) !important;
+      }
+
+      .border-accent {
+        border-color: var(--accent) !important;
+      }
+    </style>
+  </head>
+
+  <body class="bg-light">
+    <!-- Navbar -->
+    <nav
+      class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top py-3 shadow"
+    >
+      <div class="container">
+        <a
+          class="navbar-brand d-flex align-items-center gap-3"
+          href="{{ url_for('home') }}"
+        >
+          <div class="logo-container">
+            <img
+              src="https://static.wixstatic.com/media/6685d7_686c085bd3864f3e8ae805bfc3407db3~mv2.png/v1/fill/w_420,h_393,al_c,lg_1,q_85,enc_avif,quality_auto/MRU-Logo2.png"
+              alt="Mallareddy University Logo"
+              class="logo"
+              style="height: 50px"
+            />
+          </div>
+          <div>
+            <div class="fw-semibold fs-5">Mallareddy University</div>
+            <div class="text-white-50 small fst-italic">
+              Excellence in Education
+            </div>
+          </div>
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarContent"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('announcements') }}"
+                >Announcements</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('eventregistration') }}"
+                >Event Registration</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('participants') }}"
+                >Participant List</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('payment_bp.payment') }}"
+                >Payment</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('about') }}">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('contact') }}">Contact Us</a>
+            </li>
+          </ul>
+
+          <div class="d-flex gap-2">
+            <a href="{{ url_for('profile') }}" class="btn btn-accent"
+              >Profile</a
+            >
+            <button class="btn btn-outline-light" onclick="logout()">
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      class="hero bg-primary py-5 mb-5 text-white"
+      style="
+        background: linear-gradient(
+            rgba(43, 50, 140, 0.8),
+            rgba(43, 50, 140, 0.8)
+          ),
+          url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+        background-size: cover;
+      "
+    >
+      <div class="container py-5">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center">
+            <h1 class="display-4 fw-bold mb-4">
+              Welcome to Mallareddy University Event Management
+            </h1>
+            <p class="lead mb-4">
+              Discover exciting events, register to participate, and connect
+              with your university community
+            </p>
+            <a
+              href="{{ url_for('eventregistration') }}"
+              class="btn btn-accent btn-lg px-4"
+              >Register for Events</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features py-5">
+      <div class="container">
+        <h2 class="text-center text-primary mb-5 display-5 fw-semibold">
+          Why Choose Our Platform
+        </h2>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="feature-card bg-white rounded-4 p-4 shadow h-100">
+              <div class="text-accent mb-3">
+                <i class="fas fa-calendar-check fa-3x"></i>
+              </div>
+              <h3 class="h4">Easy Registration</h3>
+              <p class="mb-0">
+                Simple and quick event registration process with instant
+                confirmation.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-card bg-white rounded-4 p-4 shadow h-100">
+              <div class="text-accent mb-3">
+                <i class="fas fa-money-bill-wave fa-3x"></i>
+              </div>
+              <h3 class="h4">Secure Payments</h3>
+              <p class="mb-0">
+                Safe and reliable payment processing for event fees and tickets.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-card bg-white rounded-4 p-4 shadow h-100">
+              <div class="text-accent mb-3">
+                <i class="fas fa-bullhorn fa-3x"></i>
+              </div>
+              <h3 class="h4">Latest Updates</h3>
+              <p class="mb-0">
+                Stay informed with real-time announcements and event
+                notifications.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-5">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-md-4">
+            <h3 class="h5 mb-3">Quick Links</h3>
+            <ul class="list-unstyled">
+              <li class="mb-2">
+                <a
+                  class="text-white-50 text-decoration-none hover-text-accent"
+                  href="{{ url_for('home') }}"
+                  >Home</a
+                >
+              </li>
+              <li class="mb-2">
+                <a
+                  class="text-white-50 text-decoration-none hover-text-accent"
+                  href="{{ url_for('announcements') }}"
+                  >Announcements</a
+                >
+              </li>
+              <li class="mb-2">
+                <a
+                  class="text-white-50 text-decoration-none hover-text-accent"
+                  href="{{ url_for('eventregistration') }}"
+                  >Event Registration</a
+                >
+              </li>
+              <li class="mb-2">
+                <a
+                  class="text-white-50 text-decoration-none hover-text-accent"
+                  href="{{ url_for('participants') }}"
+                  >Participant List</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h3 class="h5 mb-3">Resources</h3>
+            <ul class="list-unstyled">
+              <li class="mb-2">
+                <a
+                  class="text-white-50 text-decoration-none hover-text-accent"
+                  href="{{ url_for('payment_bp.payment') }}"
+                  >Payment</a
+                >
+              </li>
+              <li class="mb-2">
+                <a
+                  class="text-white-50 text-decoration-none hover-text-accent"
+                  href="{{ url_for('about') }}"
+                  >About Us</a
+                >
+              </li>
+              <li class="mb-2">
+                <a
+                  class="text-white-50 text-decoration-none hover-text-accent"
+                  href="{{ url_for('contact') }}"
+                  >Contact Us</a
+                >
+              </li>
+              <li class="mb-2">
+                <a
+                  class="text-white-50 text-decoration-none hover-text-accent"
+                  href="{{ url_for('profile') }}"
+                  >Your Profile</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h3 class="h5 mb-3">Connect With Us</h3>
+            <div class="d-flex gap-3 mb-3">
+              <a href="https://share.google/TZKAzU643mnADzUrb"
+                ><i class="fab fa-facebook"></i
+              ></a>
+              <a href="http://x.com/MRU_Hyderabad"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a
+                href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.instagram.com/mallareddyuniversity/%3Fhl%3Den&ved=2ahUKEwj6-av6g5aOAxWiRWcHHfx5MLIQFnoECCEQAQ&usg=AOvVaw29LtF-h-i9tXw6aRVIr4Wt"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a
+                href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://in.linkedin.com/school/malla-reddy-university-hyderabad/&ved=2ahUKEwii_PXag5aOAxXZVWwGHfKPPZgQFnoECCEQAQ&usg=AOvVaw1IfspHQiPsv5M1osVHve3L"
+                ><i class="fab fa-linkedin"></i
+              ></a>
+            </div>
+            <p class="text-white-50 mb-1">
+              Email: info@mallareddyuniversity.ac.in
+            </p>
+            <p class="text-white-50 mb-0">Phone: +91 91778 78365</p>
+          </div>
+        </div>
+        <div class="text-center pt-4 mt-4 border-top border-white-10">
+          <p class="mb-0 small">
+            &copy; 2023 Mallareddy University Event Management System. All
+            rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      function logout() {
+        if (confirm("Are you sure you want to logout?")) {
+          window.location.href = "/logout";
+        }
+      }
+    </script>
+  </body>
+</html>

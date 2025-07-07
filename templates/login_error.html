@@ -1,0 +1,41 @@
+<!-- templates/login_error.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login Error</title>
+    <style>
+      .error-container {
+        max-width: 500px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ff4444;
+        border-radius: 5px;
+        background-color: #ffebee;
+        text-align: center;
+      }
+      .error-message {
+        color: #d32f2f;
+        margin-bottom: 20px;
+      }
+      .retry-btn {
+        background-color: #1976d2;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="error-container">
+      <h2 class="error-message">{{ error_message }}</h2>
+      <!-- In your login.html -->
+      <form action="{{ url_for('login') }}" method="POST">
+        <!-- Your existing form fields -->
+      </form>
+    </div>
+  </body>
+</html>

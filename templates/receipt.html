@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transaction Receipt Generator</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f9f9f9;
+        color: #333;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 800px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+      }
+
+      .header {
+        border-bottom: 2px solid #2b328c;
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+      }
+
+      .logo {
+        width: 120px;
+        height: auto;
+        margin-right: 25px;
+      }
+
+      .company-info h1 {
+        color: #2b328c;
+      }
+
+      .company-info p {
+        color: #666;
+      }
+
+      .form-control:focus {
+        border-color: #f46a1c;
+        box-shadow: 0 0 0 0.25rem rgba(244, 106, 28, 0.25);
+      }
+
+      .btn-primary {
+        background-color: #f46a1c;
+        border-color: #f46a1c;
+      }
+
+      .btn-primary:hover {
+        background-color: #e05d16;
+        border-color: #e05d16;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .receipt {
+        margin-top: 35px;
+        padding: 25px;
+        border: 2px solid #2b328c;
+        border-radius: 8px;
+        display: none;
+        background-color: #f8f9ff;
+      }
+
+      .receipt h2 {
+        color: #2b328c;
+        border-bottom: 2px solid #f46a1c;
+        padding-bottom: 12px;
+      }
+
+      .receipt-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 12px;
+        padding-bottom: 12px;
+        border-bottom: 1px dashed #ddd;
+      }
+
+      .receipt-item .label {
+        font-weight: bold;
+        color: #2b328c;
+      }
+
+      .receipt-item .value {
+        color: #555;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header d-flex align-items-center">
+        <img
+          src="https://static.wixstatic.com/media/6685d7_686c085bd3864f3e8ae805bfc3407db3~mv2.png/v1/fill/w_420,h_393,al_c,lg_1,q_85,enc_avif,quality_auto/MRU-Logo2.png"
+          alt="MRU Logo"
+          class="logo"
+        />
+        <div class="company-info">
+          <h1 class="mb-1">Transaction System</h1>
+          <p class="mb-0">Generate receipts for your transactions</p>
+        </div>
+      </div>
+
+      <form id="transactionForm">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="transactionDate" class="form-label"
+              >Transaction Date</label
+            >
+            <input
+              type="date"
+              class="form-control"
+              id="transactionDate"
+              required
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="transactionId" class="form-label">Transaction ID</label>
+            <input
+              type="text"
+              class="form-control"
+              id="transactionId"
+              placeholder="TRX-123456"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="customerName" class="form-label">Customer Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="customerName"
+            placeholder="Enter your name"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            id="description"
+            placeholder="Transaction details"
+          />
+        </div>
+
+        <button
+          type="button"
+          class="btn btn-primary btn-lg w-100"
+          id="generateReceipt"
+        >
+          Generate Receipt
+        </button>
+      </form>
+
+      <div class="receipt" id="receipt">
+        <h2>Transaction Receipt</h2>
+        <div class="receipt-details">
+          <div class="receipt-item">
+            <span class="label">Date:</span>
+            <span class="value" id="receiptDate"></span>
+          </div>
+          <div class="receipt-item">
+            <span class="label">Transaction ID:</span>
+            <span class="value" id="receiptId"></span>
+          </div>
+          <div class="receipt-item">
+            <span class="label">Customer Name:</span>
+            <span class="value" id="receiptCustomer"></span>
+          </div>
+          <div class="receipt-item">
+            <span class="label">Description:</span>
+            <span class="value" id="receiptDescription"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      document
+        .getElementById("generateReceipt")
+        .addEventListener("click", function () {
+          // Get form values
+          const date = document.getElementById("transactionDate").value;
+          const transactionId = document.getElementById("transactionId").value;
+          const customerName = document.getElementById("customerName").value;
+          const description = document.getElementById("description").value;
+
+          // Validate form
+          if (!date || !transactionId || !customerName) {
+            alert("Please fill in all required fields");
+            return;
+          }
+
+          // Set receipt values
+          document.getElementById("receiptDate").textContent = formatDate(date);
+          document.getElementById("receiptId").textContent = transactionId;
+          document.getElementById("receiptCustomer").textContent = customerName;
+          document.getElementById("receiptDescription").textContent =
+            description || "N/A";
+
+          // Show receipt
+          document.getElementById("receipt").style.display = "block";
+
+          // Scroll to receipt
+          document
+            .getElementById("receipt")
+            .scrollIntoView({ behavior: "smooth" });
+        });
+
+      function formatDate(dateString) {
+        const options = { year: "numeric", month: "long", day: "numeric" };
+        return new Date(dateString).toLocaleDateString(undefined, options);
+      }
+
+      // Set default date to today
+      document.getElementById("transactionDate").valueAsDate = new Date();
+
+      // Auto-focus on first input field
+      document.getElementById("transactionDate").focus();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+# Web Framework
+Flask==2.3.3
+
+# MongoDB Driver
+pymongo==4.7.2
+dnspython==2.6.1  # Needed for mongodb+srv URI parsing
+
+# Password Hashing
+bcrypt==4.1.2
+
+# QR Code Generation
+pyqrcode==1.2.1
+pypng==0.20220715.0
+
+# PDF Generation
+fpdf==1.7.2
+
+# Email validation (optional but useful)
+email-validator==2.1.0.post1
+
+# For safe handling of environment variables (optional)
+python-dotenv==1.0.1
+Flask-Bootstrap
+
+gunicorn
