@@ -276,11 +276,22 @@
           return;
         }
 
-        // Simulate API call
-        setTimeout(() => {
-          alert("OTP sent successfully to " + email);
-          startOtpTimer(120); // 2 minutes
-        }, 500);
+        fetch("/send-otp", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: email }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            alert(data.message);
+            if (data.message.startsWith("✅")) {
+              startOtpTimer(120); // 2 minutes
+            }
+          })
+          .catch((err) => {
+            alert("Error sending OTP.");
+            console.error(err);
+          });
       }
 
       function startOtpTimer(seconds) {
@@ -308,19 +319,6 @@
         const secs = seconds % 60;
         otpButton.innerText = `Wait ${mins}:${secs < 10 ? "0" : ""}${secs}`;
       }
-
-      // Form validation
-      document
-        .getElementById("registerForm")
-        .addEventListener("submit", function (e) {
-          const password = this.elements["password"].value;
-          const rePassword = this.elements["re_password"].value;
-
-          if (password !== rePassword) {
-            e.preventDefault();
-            alert("Passwords do not match!");
-          }
-        });
     </script>
   </body>
 </html>
