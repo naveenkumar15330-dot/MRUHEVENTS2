@@ -35,8 +35,8 @@ user_collection1 = db1["studentinformation"]
 dbpp = client["student"]
 collectionpp = dbpp["studentinformation"]
 # Email configuration
-SENDER_EMAIL = "naveenkumar15330@gmail.com"
-SENDER_PASSWORD = "opnatolaqxlmetqs"  # Gmail App Password
+SENDER_EMAIL = "mruhevents@gmail.com"
+SENDER_PASSWORD = "zwvkhdsatclxqjtx"  # Gmail App Password
 #login route
 
 @app.route("/")
@@ -294,8 +294,8 @@ def generate_otp():
     return "".join([str(random.randint(0, 9)) for _ in range(6)])
 
 def send_otp_email(to_email, otp):
-    from_mail = "naveenkumar15330@gmail.com"
-    app_password = "opnatolaqxlmetqs"  # App password only
+    from_mail = "mruhevents@gmail.com"
+    app_password = "zwvkhdsatclxqjtx"  # App password only
 
     if not is_valid_email(to_email):
         return False, "Invalid email format"
