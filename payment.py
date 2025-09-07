@@ -14,8 +14,8 @@ payment_bp = Blueprint('payment_bp', __name__)
 
 # Constants
 ORG_NAME = "MRUH-EVENTS"
-SENDER_EMAIL = "naveenkumar15330@gmail.com"
-SENDER_PASSWORD = "opnatolaqxlmetqs"
+SENDER_EMAIL = "mruhevents@gmail.com"
+SENDER_PASSWORD = "zwvkhdsatclxqjtx"
 UPI_ID = "6305996729-2@ybl"
 
 client = MongoClient("mongodb+srv://naveen_03:Navi630599@cluster0.b2w86jh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
