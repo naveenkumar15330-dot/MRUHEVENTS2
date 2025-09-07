@@ -12,8 +12,8 @@ mongo_client = MongoClient("mongodb+srv://naveen_03:Navi630599@cluster0.b2w86jh.
 mongo_db = mongo_client["studentinformation"]
 user_data_collection = mongo_db["student"]
 
-SENDER_EMAIL = "naveenkumar15330@gmail.com"
-SENDER_APP_PASSWORD = "opnatolaqxlmetqs"
+SENDER_EMAIL = "mruhevents@gmail.com"
+SENDER_APP_PASSWORD = "zwvkhdsatclxqjtx"
 
 @reset_bp.route('/reset_password')
 def display_reset_page():
